@@ -9,7 +9,7 @@ VY is having a campaign trying to reward users for being environmentally conciou
 <br>
 
 ## Proccess
-All you have to do is just to register an account, confirm the email, and join the "Green Journey" program. This process has been automated in [original](https://github.com/joseph-gerald/free-narvesen/blob/main/original.py) and [AI beautified](https://github.com/joseph-gerald/free-narvesen/blob/main/vy.py).
+All you have to do is just to register an account, confirm the email, and join the "Green Journey" program. This process has been automated in the [original code](https://github.com/joseph-gerald/free-narvesen/blob/main/original.py) and [AI beautified](https://github.com/joseph-gerald/free-narvesen/blob/main/vy.py) one.
 
 <br>
 
