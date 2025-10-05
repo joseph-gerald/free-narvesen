@@ -1,40 +1,72 @@
-# free-narvesen
-Abusing VY's "Green Journey" campaign to get free pastry and coffee.
+# Free Narvesen
+VY is having a campaign giving out free a pastry and hot beverage to all of their users. The next step from there is pretty obvious, all we need to do is just to generate accounts to get free food!
+
+
+### Example of Full Web App Implementation
+
+
+
+https://github.com/user-attachments/assets/f444eeab-de7b-4a97-9b22-093af1d2cacf
+
+
+
+
 
 <br>
 
-## Background
-VY is having a campaign trying to reward users for being environmentally concious through public transport. Their rewards are some discounts and coupons for a free pastry and hot beverage (*coutesty of narvesen*).
-
-<br>
 
 ## Proccess
-All you have to do is just to register an account, confirm the email, and join the "Green Journey" program. This process has been automated in the [original code](https://github.com/joseph-gerald/free-narvesen/blob/main/original.py) and [AI beautified](https://github.com/joseph-gerald/free-narvesen/blob/main/vy.py) one.
+All you have to do is just to register an account, confirm the email, and join the "Green Journey" program. This process has been automated in the [original code](https://github.com/joseph-gerald/free-narvesen/blob/main/original/main.py) and a package you can install.
 
 <br>
 
 # Setup
+
+You can install this package with pip:
+
 ```
-TODO: this
+pip install vy-gen
 ```
 
-<br>
+Only thing left is to implement the emails. You should have a class with the two methods shown below.
 
-You'll need to implement your own handling for emails, and should have the two methods shown below.
-
-## Boilerplater Email Service Implementation
 ```py
-from vy import VyAccountGenerator
-
-class MyEmailService:
+class EmailService:
     def generate_email(self) -> str:
         # Your implementation
-        return f"{username}@{domain}"
-    
+        email = "user@example.com"
+
+        return email
+
     def get_verification_code(self, email: str) -> str:
         # Your implementation  
-        return code (you need to parse it yourself)
+        code = "123456"
 
-email_service = MyEmailService()
-generator = VyAccountGenerator(email_service)
+        return code
+```
+
+You should end up with something like this as your final script
+
+```py
+from vy import AccountGenerator
+
+class EmailService:
+    ...
+
+proxies = {
+    "https": f"http://..." # optional
+}
+
+email_service = EmailService()
+
+generator = AccountGenerator(email_service, proxies=proxies)
+
+try:
+    credentials = generator.generate_account()
+    print(f"Account created successfully!")
+    print(f"Email: {credentials.email}")
+    print(f"Password: {credentials.password}")
+    print(f"Account Number: {credentials.account_number}")
+except Exception as e:
+    print(f"Failed to create account: {e}")
 ```
