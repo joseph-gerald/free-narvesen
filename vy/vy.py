@@ -35,31 +35,7 @@ class AuthTokens:
     transaction_id: str
     page_view_id: str
 
-
-class EmailServiceProtocol(Protocol):
-    """Protocol defining the interface for email services."""
-    
-    def generate_email(self) -> str:
-        """Generate a new temporary email address."""
-        ...
-    
-    def get_verification_code(self, email: str) -> str:
-        """
-        Get verification code from the specified email.
-        
-        Args:
-            email: The email address to get verification code from
-            
-        Returns:
-            The verification code as string
-            
-        Raises:
-            ValueError: If verification code cannot be retrieved
-        """
-        ...
-
-
-class VyAccountGenerator:
+class AccountGenerator:
     """
     A class to generate Vy.no accounts programmatically.
     
@@ -75,7 +51,7 @@ class VyAccountGenerator:
     PROJECT_ID = "B2C_1A_V1_SIGNUPSIGNIN"
     TENANT_ID = "c177e224-b676-42c5-843e-99efb0f2bfce"
     
-    def __init__(self, email_service: EmailServiceProtocol, proxies: Optional[Dict[str, str]] = None) -> None:
+    def __init__(self, email_service, proxies: Optional[Dict[str, str]] = None) -> None:
         """
         Initialize the account generator.
         
@@ -132,11 +108,14 @@ class VyAccountGenerator:
             ValueError: If tokens cannot be parsed
         """
         try:
+            if "captcha-delivery.com" in html:
+                raise ValueError("You have been blocked (captcha)")
+            
             soup = BeautifulSoup(html, 'html.parser')
             data_element = soup.find(attrs={"data-container": "true"})
             
             if not data_element or not data_element.contents:
-                raise ValueError("No data container found in HTML")
+                raise ValueError("No data container found in HTML (error on previous step?)")
             
             # Extract JavaScript settings object
             content = data_element.contents[0]
@@ -244,7 +223,7 @@ class VyAccountGenerator:
         try:
             # Step 1: Initialize authentication
             response = self.session.get(self.INIT_AUTH_URL, allow_redirects=True)
-            print(response.status_code)
+
             tokens = self._parse_auth_tokens(response.text)
             self.session.headers["x-csrf-token"] = tokens.csrf_token
             
@@ -321,13 +300,13 @@ class VyAccountGenerator:
             raise
 
 def main() -> None:
-    """Example usage of the VyAccountGenerator."""
+    """Example usage of the AccountGenerator."""
     email_service = None # ah implement yourself please
     
     if email_service is None:
         raise ValueError("Email service must be provided")
     
-    generator = VyAccountGenerator(email_service)
+    generator = AccountGenerator(email_service)
     
     try:
         credentials = generator.generate_account()

@@ -1,0 +1,51 @@
+[project]
+name = "vy-gen" # Required
+version = "1.0.0" # Required
+readme = "README.md"
+description = "Automate the creation of VY.NO accounts to acquire Narvesen coupons." # Optional
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+keywords = ["automation", "free-food", "python", "botting"]
+
+authors = [
+    { name = "Joseph Gerald", email = "contact@jooo.tech" }, # Optional
+]
+
+maintainers = [
+    { name = "Joseph Gerald", email = "contact@jooo.tech" }, # Optional
+]
+
+classifiers = [ # Optional
+    # How mature is this project? Common values are
+    #   3 - Alpha
+    #   4 - Beta
+    #   5 - Production/Stable
+
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Topic :: Internet :: WWW/HTTP :: Session",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+dependencies = ["curl_cffi", "beautifulsoup4"]
+
+#
+[project.urls]
+"Homepage" = "https://github.com/joseph-gerald/free-narvesen"
+"Bug Reports" = "https://github.com/joseph-gerald/free-narvesen/issues"
+"Source" = "https://github.com/joseph-gerald/free-narvesen"
+
+
+[tool.setuptools]
+package-data = { "sample" = ["*.dat"] }
+
+[build-system]
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["vy"]
