@@ -19,7 +19,6 @@ proxies = {
 }
 
 email_service = EmailService()
-print(f"Using email: {email_service.generate_email()}")
 
 if email_service is None:
     raise ValueError("Email service must be provided")
