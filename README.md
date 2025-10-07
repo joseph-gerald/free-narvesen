@@ -1,6 +1,8 @@
 # Free Narvesen
-VY is having a campaign giving out free a pastry and hot beverage to all of their users. The next step from there is pretty obvious, all we need to do is just to generate accounts to get free food!
+VY is having a campaign giving out free a ~pastry and~ hot beverage to all of their users. The next step from there is pretty obvious, all we need to do is just to generate accounts to get free food!
 
+> [!WARNING]  
+> The free pastry coupon has been replaced with a hot beverage only one since `05/10/2025`
 
 ### Example of Full Web App Implementation
 
@@ -8,6 +10,7 @@ VY is having a campaign giving out free a pastry and hot beverage to all of thei
 
 https://github.com/user-attachments/assets/f444eeab-de7b-4a97-9b22-093af1d2cacf
 
+> Additionally scraped coupon data to show a clone page
 
 
 
